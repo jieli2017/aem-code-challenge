@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+          jcr:primaryType="nt:unstructured">
+    <container jcr:primaryType="nt:unstructured"
+               actionType="foundation/components/form/actions/store"
+               action="/var/anf-code-challenge/"
+               sling:resourceType="anf-code-challenge/components/form/container">
+        <first-name jcr:primaryType="nt:unstructured"
+               sling:resourceType="anf-code-challenge/components/form/text"
+               jcr:title="First Name"
+               name="firstName"
+               type="text"
+               rows="2"/>
+        <last-name jcr:primaryType="nt:unstructured"
+               sling:resourceType="anf-code-challenge/components/form/text"
+               jcr:title="Last Name"
+               name="lastName"
+               type="text"
+               rows="2"/>
+        <age jcr:primaryType="nt:unstructured"
+               sling:resourceType="anf-code-challenge/components/form/text"
+               jcr:title="Age"
+               name="age"
+               type="text"
+               rows="2"/>
+        <country jcr:primaryType="nt:unstructured"
+               sling:resourceType="anf-code-challenge/components/form/country"
+               jcr:tite="Country"
+               name="country"/>
+        <submit jcr:primaryType="nt:unstructured"
+               sling:resourceType="anf-code-challenge/components/form/button"
+               jcr:title="Submit"
+               name="submit"
+               type="submit"/>
+    </container>
+</jcr:root>

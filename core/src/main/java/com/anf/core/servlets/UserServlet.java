@@ -16,22 +16,31 @@
 package com.anf.core.servlets;
 
 import com.anf.core.services.ContentService;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
 import org.apache.sling.servlets.annotations.SlingServletPaths;
+import org.apache.sling.servlets.post.JSONResponse;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
+import javax.xml.ws.Response;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @Component(service = { Servlet.class })
 @SlingServletPaths(
         value = "/bin/saveUserDetails"
 )
-public class UserServlet extends SlingSafeMethodsServlet {
+public class UserServlet extends SlingAllMethodsServlet {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,8 +48,18 @@ public class UserServlet extends SlingSafeMethodsServlet {
     private ContentService contentService;
 
     @Override
-    protected void doGet(final SlingHttpServletRequest req,
+    protected void doPost(final SlingHttpServletRequest req,
             final SlingHttpServletResponse resp) throws ServletException, IOException {
         // Make use of ContentService to write the business logic
+        /***Begin Code - Jie Li ***/
+        resp.setContentType(JSONResponse.RESPONSE_CONTENT_TYPE);
+        PrintWriter out = resp.getWriter();
+        BufferedReader reader = req.getReader();
+        JsonObject formJsonObject = new JsonParser().parse(reader).getAsJsonObject();
+        JsonObject resultJson = contentService.commitUserDetails(req, formJsonObject);
+        out.print(resultJson);
+        out.flush();
+
+        /***END Code*****/
     }
 }
