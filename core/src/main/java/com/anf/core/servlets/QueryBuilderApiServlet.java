@@ -26,6 +26,7 @@ import com.day.cq.search.result.SearchResult;
 @SlingServletPaths(
   value = "/bin/querybuilder"
 )
+/***Begin Code - Jie Li Exercise 3 ***/
 public class QueryBuilderApiServlet extends SlingSafeMethodsServlet {
 
     private static final Logger log = LoggerFactory.getLogger(QueryBuilderApiServlet.class);
@@ -59,3 +60,4 @@ public class QueryBuilderApiServlet extends SlingSafeMethodsServlet {
 
     }
 }
+/***END Code*****/

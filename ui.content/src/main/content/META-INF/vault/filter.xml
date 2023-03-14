@@ -4,4 +4,5 @@
     <filter root="/content/anf-code-challenge" mode="merge"/>
     <filter root="/content/dam/anf-code-challenge" mode="merge"/>
     <filter root="/content/experience-fragments/anf-code-challenge" mode="merge"/>
+    <filter root="/home/users/system" mode="merge"/>
 </workspaceFilter>

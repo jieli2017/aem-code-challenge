@@ -28,6 +28,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
+/***Begin Code - Jie Li ***/
 
 @Component(service = Servlet.class, property = {Constants.SERVICE_DESCRIPTION + "= Json Data in dynamic Dropdown",
   "sling.servlet.paths=" + "/bin/jsonDataDropdown", "sling.servlet.methods=" + HttpConstants.METHOD_GET
@@ -85,3 +86,5 @@ public class JsonDataDropdownServlet extends SlingSafeMethodsServlet {
         }
     }
 }
+
+/***END Code*****/
