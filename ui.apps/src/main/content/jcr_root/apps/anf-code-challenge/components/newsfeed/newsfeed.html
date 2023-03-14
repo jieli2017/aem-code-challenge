@@ -1,0 +1,33 @@
+<div class="news-feed-container"
+     data-sly-use.model="com.anf.core.models.NewsFeedModel"
+     data-sly-use.template="core/wcm/components/commons/v1/templates.html"
+     data-sly-test.hasNews="${model.newsList.size > 0}">
+    <sly data-sly-test.topNews="${model.newsList[0]}">
+        <div class="first-row">
+            <div class="image-section">
+                <img src="${topNews.urlImage}">
+            </div>
+            <div class="text-section">
+                <h2>${topNews.title}</h2>
+                <div class="subtitle">
+                    <div class="current-date">${topNews.currentDate} || </div>
+                    <div class="news-author">${topNews.author}</div>
+                </div>
+                <div class="content">${topNews.content @ context='html'}</div>
+            </div>
+        </div>
+    </sly>
+    <div class="other-row" data-sly-list.news="${model.newsList}">
+        <div class="news-item" data-sly-test="${newsList.index > 0}">
+            <img src="${news.urlImage}">
+            <h2>${news.title}</h2>
+            <div class="subtitle">
+                <div class="current-date">${news.currentDate} || </div>
+                <div class="news-author">${news.author}</div>
+            </div>
+            <div class="content">${news.content @ context='html'}</div>
+        </div>
+    </div>
+
+</div>
+<sly data-sly-call="${template.placeholder @ isEmpty=!hasNews}"></sly>

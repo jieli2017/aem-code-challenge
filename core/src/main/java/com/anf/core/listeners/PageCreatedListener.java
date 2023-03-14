@@ -29,7 +29,7 @@ import com.day.cq.wcm.api.PageModification;
 @ServiceDescription("Page Created Listener")
 public class PageCreatedListener implements EventHandler {
 
-    private final Logger LOG = LoggerFactory.getLogger(PageCreatedListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PageCreatedListener.class);
 
     private static final Map<String, Object> AUTH_INFO = Collections.singletonMap(ResourceResolverFactory.SUBSERVICE, "anf-write-service");
     private static final String ROOT_PAGE_PATH = "/content/anf-code-challenge/us/en";
