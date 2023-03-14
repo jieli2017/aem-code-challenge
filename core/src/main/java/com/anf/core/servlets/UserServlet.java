@@ -16,6 +16,7 @@
 package com.anf.core.servlets;
 
 import com.anf.core.services.ContentService;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -51,11 +52,11 @@ public class UserServlet extends SlingAllMethodsServlet {
     protected void doPost(final SlingHttpServletRequest req,
             final SlingHttpServletResponse resp) throws ServletException, IOException {
         // Make use of ContentService to write the business logic
-        /***Begin Code - Jie Li ***/
+        /***Begin Code - Jie Li Test 1***/
         resp.setContentType(JSONResponse.RESPONSE_CONTENT_TYPE);
         PrintWriter out = resp.getWriter();
         BufferedReader reader = req.getReader();
-        JsonObject formJsonObject = new JsonParser().parse(reader).getAsJsonObject();
+        JsonObject formJsonObject = new Gson().fromJson(reader, JsonObject.class);
         JsonObject resultJson = contentService.commitUserDetails(req, formJsonObject);
         out.print(resultJson);
         out.flush();

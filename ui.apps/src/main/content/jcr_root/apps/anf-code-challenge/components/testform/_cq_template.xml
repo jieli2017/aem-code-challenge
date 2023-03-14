@@ -2,8 +2,6 @@
 <jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
           jcr:primaryType="nt:unstructured">
     <container jcr:primaryType="nt:unstructured"
-               actionType="foundation/components/form/actions/store"
-               action="/var/anf-code-challenge/"
                sling:resourceType="anf-code-challenge/components/form/container">
         <first-name jcr:primaryType="nt:unstructured"
                sling:resourceType="anf-code-challenge/components/form/text"
