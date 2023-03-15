@@ -1,0 +1,23 @@
+{
+  "newsfeed": {
+    "jcr:primaryType": "nt:unstructured",
+    "news_01": {
+      "jcr:primaryType": "nt:unstructured",
+      "title": "testTitle",
+      "author": "test author",
+      "description": "test description",
+      "content": "content",
+      "url": "http://localhost",
+      "urlImage": "http://localhost:4502/1.jpg"
+    },
+    "news_02": {
+      "jcr:primaryType": "nt:unstructured",
+      "title": "testTitle2",
+      "author": "test author2",
+      "description": "test description2",
+      "content": "content2",
+      "url": "http://localhost2",
+      "urlImage": "http://localhost:4502/2.jpg"
+    }
+  }
+}

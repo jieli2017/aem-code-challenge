@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Default;
@@ -17,17 +18,18 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 /***Begin Code - Jie Li Exercise 2 ***/
 
-@Model(adaptables = Resource.class, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
+@Model(adaptables = {SlingHttpServletRequest.class},
+        defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class NewsFeedModel {
 
     private static final String DEFAULT_NEW_DATA_PATH = "/var/commerce/products/anf-code-challenge/newsData";
 
     @SlingObject
-    private ResourceResolver resourceResolver;
+    ResourceResolver resourceResolver;
 
     @ValueMapValue
     @Default(values = DEFAULT_NEW_DATA_PATH)
-    private String newsDataPath;
+    String newsDataPath;
 
     private List<NewsModel> newsList = new ArrayList<>();
 
