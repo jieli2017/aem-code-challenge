@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-import com.anf.core.services.WorkflowNotificationService;
 import org.apache.sling.commons.json.JSONArray;
 import org.apache.sling.commons.json.JSONException;
 import org.apache.sling.commons.json.JSONObject;
@@ -40,9 +39,6 @@ public class PreviewWorkflow implements WorkflowProcess {
 	// following constants are used in json configuration used for the proccess args.
 	private static final String AGENTS_KEY = "agents";
 	private static final String APPROVER_KEY = "approver";
-
-	
-	
 	
 	/**
 	 * the logger
@@ -57,10 +53,6 @@ public class PreviewWorkflow implements WorkflowProcess {
 	protected Replicator replicator;
 	@Reference
     protected AgentManager agentManager;
-	@Reference
-	private WorkflowNotificationService workflowNotificationService;
-
-	
 	
 	/*
 	 * 
@@ -68,8 +60,6 @@ public class PreviewWorkflow implements WorkflowProcess {
 	 * 
 	 * Uses JSON for process args
 	 * {agents : [{name : publish_internal_13}] }
-	 * 
-	 * 
 	 * 
 	 */
 	
@@ -80,51 +70,39 @@ public class PreviewWorkflow implements WorkflowProcess {
 		WorkflowData workflowData = item.getWorkflowData();
 		String processArgs = args.get("PROCESS_ARGS", "false");
 
-		log.info("aemtrpsys activate-workflow, processArgs = {}", processArgs);
+		log.info("aemahpsys activate-workflow, processArgs = {}", processArgs);
 
 		List<String> agents = getAgents(processArgs);
 		
-		log.info("aemtrpsys activate-workflow, agents = {}", Arrays.toString(agents.toArray()));
+		log.info("aemahpsys activate-workflow, agents = {}", Arrays.toString(agents.toArray()));
 		
 		String approver = getApprover(processArgs);
 		
-		log.info("aemtrpsys activate-workflow, approver = {}", approver);
+		log.info("aemahpsys activate-workflow, approver = {}", approver);
 		
         if (workflowData.getPayloadType().equals(TYPE_JCR_PATH)) {
             String path = workflowData.getPayload().toString() + "/jcr:content";
             
-            try {
-            
+            try {           
             	// replicate 
-              for(final String agentName : agents){
-    			ReplicationOptions opts = new ReplicationOptions();
-                opts.setFilter(new AgentFilter(){
-                    public boolean isIncluded(final Agent agent) {
-                    	return agentName.equals(agent.getId());
-                    }
-                });	
-                Session jcrSession = workflowSession.adaptTo(Session.class);
-                replicator.replicate(jcrSession, ReplicationActionType.ACTIVATE, path, opts);
-                /*
-                 * the following code optionally saves the agent name as a property on the content node.
-                 * not really needed.
-                 */
-//                Node node = (Node) jcrSession.getItem(path);
-//                if (node != null) {
-//                  node.setProperty(agentName, true );
-//                  jcrSession.save();
-//                }
-        		log.info("aemtrpsys activate-workflow COMPLETE, agent = {}, path = {}", agentName, path);
-                
-              }               
+				for(final String agentName : agents) {
+					ReplicationOptions opts = new ReplicationOptions();
+					opts.setFilter(new AgentFilter(){
+						public boolean isIncluded(final Agent agent) {
+							return agentName.equals(agent.getId());
+						}
+					});	
+					Session jcrSession = workflowSession.adaptTo(Session.class);
+					replicator.replicate(jcrSession, ReplicationActionType.ACTIVATE, path, opts);
+					log.info("aemahpsys activate-workflow COMPLETE, agent = {}, path = {}", agentName, path);              
+				}               
             } catch (Exception e) {
-              throw new WorkflowException("aemtrpsys activate-workflow EXCEPTION, ", e);
+              throw new WorkflowException("aemahpsys activate-workflow EXCEPTION, ", e);
             } 
             
         }
 	}
 	
-
 	/*
 	 * agents is mandatory, if no agents are specified an excpetion is thrown and the workflow fails.
 	 * 
@@ -140,7 +118,7 @@ public class PreviewWorkflow implements WorkflowProcess {
 			      arrayList.add(name);
 			 }
 		} catch (JSONException e) {
-			throw new WorkflowException("aemtrpsys activate-workflow, EXCEPTION, can't read process args", e);
+			throw new WorkflowException("aemahpsys activate-workflow, EXCEPTION, can't read process args", e);
 		}
 		
 		return arrayList;
@@ -156,7 +134,7 @@ public class PreviewWorkflow implements WorkflowProcess {
 			final String approver = jObject.optString(APPROVER_KEY);  
 			return (approver != null) ? approver : "";
 		} catch (JSONException e) {
-			throw new WorkflowException("aemtrpsys activate-workflow, EXCEPTION, can't read process args", e);
+			throw new WorkflowException("aemahpsys activate-workflow, EXCEPTION, can't read process args", e);
 		}
 		
 	}

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:isCheckedOut="{Boolean}false"
+    jcr:primaryType="cq:WorkflowModel"
+    jcr:uuid="598ac8c6-a208-42e3-b0c1-456df4ff9202"
+    sling:resourceType="cq/workflow/components/model"
+    description="No Description"
+    title="AHP Review Workflow">
+    <metaData
+        cq:generatingPage="/conf/global/settings/workflow/models/ahp-review-workflow/jcr:content"
+        cq:lastModified="{Long}1682648145033"
+        cq:lastModifiedBy="admin"
+        jcr:primaryType="nt:unstructured"/>
+    <nodes jcr:primaryType="nt:unstructured">
+        <node0
+            jcr:primaryType="cq:WorkflowNode"
+            title="Start"
+            type="START">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node0>
+        <node1
+            jcr:primaryType="cq:WorkflowNode"
+            description="Wait for Review Approval"
+            title="Wait for Review Approval"
+            type="PARTICIPANT">
+            <metaData
+                jcr:primaryType="nt:unstructured"
+                PARTICIPANT="admin"/>
+        </node1>
+        <node2
+            jcr:primaryType="cq:WorkflowNode"
+            title="OR_SPLIT"
+            type="OR_SPLIT">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node2>
+        <node3
+            jcr:primaryType="cq:WorkflowNode"
+            title="OR_JOIN"
+            type="OR_JOIN">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node3>
+        <node4
+            jcr:primaryType="cq:WorkflowNode"
+            description="Approve and Activate Content to Review Instance"
+            title="Approve and Activate Content to Review Instance"
+            type="PROCESS">
+            <metaData
+                jcr:primaryType="nt:unstructured"
+                PROCESS="com.anf.core.workflow.PreviewWorkflow"
+                PROCESS_ARGS="\{&quot;agents&quot;:[{&quot;name&quot;:&quot;publish&quot;}]}"
+                PROCESS_AUTO_ADVANCE="true"/>
+        </node4>
+        <node5
+            jcr:primaryType="cq:WorkflowNode"
+            description="Wait for Publish Approval"
+            title="Wait for Publish Approval"
+            type="PARTICIPANT">
+            <metaData
+                jcr:primaryType="nt:unstructured"
+                PARTICIPANT="admin"/>
+        </node5>
+        <node6
+            jcr:primaryType="cq:WorkflowNode"
+            title="OR_SPLIT"
+            type="OR_SPLIT">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node6>
+        <node7
+            jcr:primaryType="cq:WorkflowNode"
+            title="OR_JOIN"
+            type="OR_JOIN">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node7>
+        <node8
+            jcr:primaryType="cq:WorkflowNode"
+            description="Reject Activation to Publish Instance"
+            title="Reject Activation to Publish Instance"
+            type="PROCESS">
+            <metaData
+                jcr:primaryType="nt:unstructured"
+                PROCESS="/etc/workflow/scripts/noop.ecma"
+                PROCESS_AUTO_ADVANCE="true"/>
+        </node8>
+        <node9
+            jcr:primaryType="cq:WorkflowNode"
+            description="Approve and Activate Content to Publish Instance"
+            title="Approve and Activate Content to Publish Instance"
+            type="PROCESS">
+            <metaData
+                jcr:primaryType="nt:unstructured"
+                PROCESS="com.anf.core.workflow.PreviewWorkflow"
+                PROCESS_ARGS="\{&quot;agents&quot;:[{&quot;name&quot;:&quot;publish&quot;}]}"
+                PROCESS_AUTO_ADVANCE="true"/>
+        </node9>
+        <node10
+            jcr:primaryType="cq:WorkflowNode"
+            description="Reject Activation to Review Instance"
+            title="123Reject Activation to Review Instance"
+            type="PROCESS">
+            <metaData
+                jcr:primaryType="nt:unstructured"
+                PROCESS="/etc/workflow/scripts/noop.ecma"
+                PROCESS_AUTO_ADVANCE="true"/>
+        </node10>
+        <node11
+            jcr:primaryType="cq:WorkflowNode"
+            title="End"
+            type="END">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node11>
+    </nodes>
+    <transitions jcr:primaryType="nt:unstructured">
+        <node0_x0023_node1
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node0"
+            rule=""
+            to="node1">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node0_x0023_node1>
+        <node1_x0023_node2
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node1"
+            to="node2">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node1_x0023_node2>
+        <node2_x0023_node4
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node2"
+            rule=""
+            to="node4">
+            <metaData
+                jcr:primaryType="nt:unstructured"
+                isDefault="false"/>
+        </node2_x0023_node4>
+        <node4_x0023_node5
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node4"
+            rule=""
+            to="node5">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node4_x0023_node5>
+        <node5_x0023_node6
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node5"
+            to="node6">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node5_x0023_node6>
+        <node6_x0023_node8
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node6"
+            rule=""
+            to="node8">
+            <metaData
+                jcr:primaryType="nt:unstructured"
+                isDefault="false"/>
+        </node6_x0023_node8>
+        <node8_x0023_node7
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node8"
+            to="node7">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node8_x0023_node7>
+        <node6_x0023_node9
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node6"
+            rule=""
+            to="node9">
+            <metaData
+                jcr:primaryType="nt:unstructured"
+                isDefault="false"/>
+        </node6_x0023_node9>
+        <node9_x0023_node7
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node9"
+            to="node7">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node9_x0023_node7>
+        <node7_x0023_node3
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node7"
+            to="node3">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node7_x0023_node3>
+        <node2_x0023_node10
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node2"
+            rule=""
+            to="node10">
+            <metaData
+                jcr:primaryType="nt:unstructured"
+                isDefault="false"/>
+        </node2_x0023_node10>
+        <node10_x0023_node3
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node10"
+            to="node3">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node10_x0023_node3>
+        <node3_x0023_node11
+            jcr:primaryType="cq:WorkflowTransition"
+            from="node3"
+            to="node11">
+            <metaData jcr:primaryType="nt:unstructured"/>
+        </node3_x0023_node11>
+    </transitions>
+</jcr:root>

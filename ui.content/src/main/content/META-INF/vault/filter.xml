@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workspaceFilter version="1.0">
     <filter root="/conf/anf-code-challenge" mode="merge"/>
+    <filter root="/conf/global/settings/workflow/models/ahp-review-workflow"/>
     <filter root="/content/anf-code-challenge" mode="merge"/>
     <filter root="/content/dam/anf-code-challenge" mode="merge"/>
     <filter root="/content/experience-fragments/anf-code-challenge" mode="merge"/>
     <filter root="/home/users/system" mode="merge"/>
+    <filter root="/var/workflow/models"/>
 </workspaceFilter>
